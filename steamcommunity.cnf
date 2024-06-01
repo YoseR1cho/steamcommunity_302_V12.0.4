@@ -1,0 +1,36 @@
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+x509_extensions = v3_req
+distinguished_name = dn
+
+[dn]
+C = XX
+ST = XX
+L = XX
+O = XX
+OU = XX
+CN = Steamcommunity302
+#CN = steamcommunity.com
+
+[v3_req]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = steamcommunity.com
+DNS.2 = *.steamcommunity.com
+
+[ v3_ca ]
+subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid:always,issuer:always
+basicConstraints = critical,CA:true,pathlen:0
+keyUsage = critical, cRLSign, keyCertSign
+certificatePolicies=anyPolicy
+
+
+[ new_oids ]
+
+tsa_policy2 = 1.2.3.4.5.6
+tsa_policy3 = 1.2.3.4.5.7
+

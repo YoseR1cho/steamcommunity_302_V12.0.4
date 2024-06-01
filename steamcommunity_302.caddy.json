@@ -1,0 +1,231 @@
+{
+admin off
+auto_https disable_redirects
+}
+
+https://steamcommunity.com:14086, www.steamcommunity.com:14086 {
+    tls steamcommunity.crt steamcommunity.key
+    @steamcommunityrp {
+    path /comment/*
+    path /forum/*
+    path *discussions*
+    path *tradingforum*
+    path *eventcomments*
+    }
+    reverse_proxy @steamcommunityrp https://str001.steam302.xyz https://str002.steam302.xyz https://str003.steam302.xyz {
+    header_up Host steamcommunity.com
+			transport http {
+			tls
+			tls_server_name statuspage.akamaized.net
+			#tls_insecure_skip_verify
+		}
+    }
+    reverse_proxy https://steamuserimages-a.akamaihd.net https://steamstore-a.akamaihd.net https://steamcommunity-a.akamaihd.net https://eaassets-a.akamaihd.net https://humblebundle-a.akamaihd.net https://steamcommunity-a.akamaihd.net {
+	header_up Host steamcommunity.com
+		transport http {
+			tls
+			#tls_insecure_skip_verify
+		}
+    }
+}
+
+https://gist.github.com:14086 {
+tls steamcommunity.crt steamcommunity.key
+
+    reverse_proxy https://ghgist.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://api.github.com:14086 {
+tls steamcommunity.crt steamcommunity.key
+
+    reverse_proxy https://ghapi.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://github.com:14086 https://www.github.com:14086 {
+tls steamcommunity.crt steamcommunity.key
+
+    reverse_proxy https://gh.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://raw.githubusercontent.com:14086 https://raw.github.com:14086 https://camo.githubusercontent.com:14086 https://cloud.githubusercontent.com:14086 https://avatars.githubusercontent.com:14086 https://avatars0.githubusercontent.com:14086 https://avatars1.githubusercontent.com:14086 https://avatars2.githubusercontent.com:14086 https://avatars3.githubusercontent.com:14086 https://user-images.githubusercontent.com:14086 https://github-releases.githubusercontent.com:14086 {
+tls steamcommunity.crt steamcommunity.key
+
+    reverse_proxy https://ghraw.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://assets-cdn.github.com:14086 {
+tls steamcommunity.crt steamcommunity.key
+
+    reverse_proxy https://ghassets.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://github.githubassets.com:14086 https://help.github.com:14086 https://docs.github.com:14086 {
+tls steamcommunity.crt steamcommunity.key
+
+    reverse_proxy https://gh154.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://codeload.github.com:14086 {
+tls steamcommunity.crt steamcommunity.key
+
+    reverse_proxy https://ghcload.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+
+https://*.github.io:14086 https://www.github.io:14086 https://github.io:14086 {
+tls steamcommunity.crt steamcommunity.key
+
+    reverse_proxy https://ghio.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://pages.github.com:14086 https://copilot.github.com:14086 https://services.github.com:14086 https://resources.github.com:14086 https://developer.github.com:14086 https://partner.github.com:14086 https://desktop.github.com:14086 https://guides.github.com:14086 {
+tls steamcommunity.crt steamcommunity.key
+
+    reverse_proxy https://ghps.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://support.github.com:14086 https://education.github.com:14086 https://enterprise.github.com:14086 https://lab.github.com:14086 https://classroom.github.com:14086 https://central.github.com:14086 {
+tls steamcommunity.crt steamcommunity.key
+
+    reverse_proxy https://gh140.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://desktop.githubusercontent.com:14086 {
+tls steamcommunity.crt steamcommunity.key
+
+    reverse_proxy https://ghdesk.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://store.steampowered.com:14086 {
+#tls self_signed
+tls steamcommunity.crt steamcommunity.key
+    # default/catchall
+    @steamstreoapp {
+    path /app/*
+    path /agecheck/*
+    }
+    @steamstreofriends {
+	path /friends/*
+    }
+
+    reverse_proxy @steamstreoapp https://steamuserimages-a.akamaihd.net https://steamstore-a.akamaihd.net https://steamcommunity-a.akamaihd.net https://eaassets-a.akamaihd.net https://humblebundle-a.akamaihd.net https://steamcommunity-a.akamaihd.net {
+    header_up Host store.steampowered.com
+    header_up User-Agent "Googlebot/2.1 (+http://www.google.com/bot.html)"
+    lb_policy random
+    transport http {
+    tls
+    #tls_insecure_skip_verify
+    }
+    }
+
+    reverse_proxy @steamstreofriends https://str001.steam302.xyz https://str002.steam302.xyz https://str003.steam302.xyz {
+    header_up Host store.steampowered.com
+			transport http {
+			tls
+			tls_server_name statuspage.akamaized.net
+			#tls_insecure_skip_verify
+		}
+    }
+
+    reverse_proxy https://steamuserimages-a.akamaihd.net https://steamstore-a.akamaihd.net https://steamcommunity-a.akamaihd.net https://eaassets-a.akamaihd.net https://humblebundle-a.akamaihd.net https://steamcommunity-a.akamaihd.net {
+    header_up Host store.steampowered.com
+    lb_policy random
+    transport http {
+    tls
+    #tls_insecure_skip_verify
+    }
+    }
+}
+
+https://api.steampowered.com:14086 {
+#tls self_signed
+tls steamcommunity.crt steamcommunity.key
+    # default/catchall
+    reverse_proxy https://steamuserimages-a.akamaihd.net https://steamstore-a.akamaihd.net https://steamcommunity-a.akamaihd.net https://eaassets-a.akamaihd.net https://humblebundle-a.akamaihd.net https://steamcommunity-a.akamaihd.net {
+    header_up Host api.steampowered.com
+    lb_policy random
+    transport http {
+    tls
+    #tls_insecure_skip_verify
+    }
+    }
+}
+
+
